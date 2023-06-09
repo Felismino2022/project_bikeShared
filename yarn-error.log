@@ -1,0 +1,44 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\FELISMINO\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add soap
+
+PATH: 
+  C:\Program Files (x86)\Haskell\bin;C:\Program Files (x86)\Haskell Platform\2012.2.0.0\lib\extralibs\bin;C:\Program Files (x86)\Haskell Platform\2012.2.0.0\bin;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\xampp\php;C:\composer;C:\Program Files\Git\cmd;C:\Oracle\instantclient_21_6;C:\instantclient_11_2;C:\xampp\php8;C:\Users\FELISMINO\AppData\Roaming\cabal\bin;C:\Users\FELISMINO\AppData\Local\Microsoft\WindowsApps;C:\Users\FELISMINO\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\FELISMINO\AppData\Roaming\npm;C:\Users\FELISMINO\AppData\Roaming\Composer\vendor\bin;C:\mongose;C:\Program Files\MongoDB\Server\5.0\bin;C:\mongose;
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.13.1
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/body-parser: ESOCKETTIMEDOUT
+      at ClientRequest.<anonymous> (C:\Users\FELISMINO\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141517:19)
+      at Object.onceWrapper (node:events:509:28)
+      at ClientRequest.emit (node:events:390:28)
+      at TLSSocket.emitRequestTimeout (node:_http_client:763:9)
+      at Object.onceWrapper (node:events:509:28)
+      at TLSSocket.emit (node:events:402:35)
+      at TLSSocket.Socket._onTimeout (node:net:501:8)
+      at listOnTimeout (node:internal/timers:557:17)
+      at processTimers (node:internal/timers:500:7)
+
+npm manifest: 
+  {
+    "dependencies": {
+      "body-parser": "^1.20.1",
+      "express": "^4.18.2",
+      "express-handlebars": "^6.0.7",
+      "handlebars": "^4.7.7",
+      "mysql2": "^3.0.1",
+      "sequelize": "^6.28.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
