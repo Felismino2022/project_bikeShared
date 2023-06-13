@@ -1,0 +1,92 @@
+<section id="content-types">
+    <div class="row">
+      {{#each estacoes}}
+     
+        <div class="col-xl-4 col-md-6 col-sm-12">
+                            <div class="card">
+                                <div class="card-content">
+                                    <a href="/infoEstacao/{{url}}">
+                                    <img src="/assets/images/samples/motorcycle.jpg" class="card-img-top img-fluid"
+                                        alt="singleminded">
+                                        </a>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{nome}}</h5>
+                                        <p class="card-text">
+                                            Chocolate sesame snaps apple pie danish cupcake sweet roll jujubes
+                                            tiramisu.Gummies
+                                            bonbon apple pie fruitcake icing biscuit apple pie jelly-o sweet roll.<br>
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#estacao" data-bs-whatever="@mdo">Levantar</button>
+                                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#estacao" data-bs-whatever="@mdo">Entregar</button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                          
+        </div>
+      {{else}}
+        <h5>Nenhuma Estação</h5>
+      {{/each}}
+    </div>
+
+</section>
+<!--Levantar biscicleta-->
+<div class="modal fade" id="estacao" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="estacao">Levantar Biscicleta</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="/levantar" method="post">
+                <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">Email:</label>
+                    <input type="email" class="form-control" id="recipient-name" name="email">
+                  </div>
+                  <div class="mb-3">
+                    <input type="hidden" class="form-control" id="recipient-name" value="" name="estacaoId">
+                  </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+              </form>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+
+<!--entregar biscicleta-->
+
+<div class="modal fade" id="estacao" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="estacao">Entregar Biscicleta</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="/entregar" method="post">
+                <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">Email:</label>
+                    <input type="email" class="form-control" id="recipient-name" name="email">
+                  </div>
+                  <div class="mb-3">
+                    <input type="hidden" class="form-control" id="recipient-name" value="" name="estacaoId">
+                  </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+              </form>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+
+      

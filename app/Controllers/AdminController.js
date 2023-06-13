@@ -1,3 +1,6 @@
+const soap = require('soap')
+const url = 'http://localhost:8080/webservice?WSDL'
+
 class AdminController{
   
     async index(req, res){
@@ -9,19 +12,8 @@ class AdminController{
     }
 
     async estacao(req, res){
-       // console.log(req.body.latitute)
-       /* const vetores = [];
-        const nomes = {nome:'filo', idade:12}
-        const nomess = {nome:'sadi', idade:14}
-        vetores.push(nomes)
-        vetores.push(nomess)
-       // req.flash("success_msg", "nome inserido com sucesso")
-      //  res.redirect('/')*/
-      const soap = require('soap')
-      const url = 'http://localhost:8080/webservice?WSDL'
-
+     
       soap.createClient(url, (err, client)=>{
-      //console.log(client.listarEstacoes)
         
         if(err){
             //res.flash('error_msg', 'houve um erro')
@@ -29,20 +21,35 @@ class AdminController{
         }else{
             client.listarEstacoes({
                 k:2,
-                latitude:10,
-                longitude:10
+                latitude:21,
+                longitude:22
             }, (err, respost) =>{
-               // if(res){
-                    res.render('admin/estacao', {layout:'main', respost:respost})
-                    //console.log(res)
-             //   }else{
-              //      res.flash('error_msg', 'houve um erro') 
-              //  }
+                    var estacoes = JSON.parse(respost.return)
+                    res.render('admin/estacoes', {layout:'main', estacoes:estacoes})
             })
         }
     })
 
       //res.render('estacao', {leyout: 'main'})
+    }
+
+    async infoEstacao(req, res){
+
+        soap.createClient(url, (err, client)=>{
+        res.render('admin/estacao', {layout:'main'})
+        console.log(req.params.url)
+            if(err){
+                console.log('erro')
+            }else{
+                console.log(client)
+                client.obterInfoEstacao({
+                    url:req.params.url
+                }, (err, res) =>{
+                    //console.log(res)
+                    
+                })
+            }
+        })
     }
 
     async setEstacoes(req, res){
@@ -121,21 +128,7 @@ class AdminController{
             })
         }
 
-        async infoEstacao(req, res){
-
-            soap.createClient(url, (err, client)=>{
-            
-                if(err){
-                    console.log('erro')
-                }else{
-                    client.obterInfoEstacao({
-                        id_estacao:req.params.id
-                    }, (err, res) =>{
-                        console.log(res)
-                    })
-                }
-            })
-        }
+        
 
         async levantarBiscicleta(req, res){
             
@@ -156,5 +149,14 @@ class AdminController{
             })
         }
 }
+
+  // console.log(req.body.latitute)
+       /* const vetores = [];
+        const nomes = {nome:'filo', idade:12}
+        const nomess = {nome:'sadi', idade:14}
+        vetores.push(nomes)
+        vetores.push(nomess)
+       // req.flash("success_msg", "nome inserido com sucesso")
+      //  res.redirect('/')*/
 
 module.exports = new AdminController()
