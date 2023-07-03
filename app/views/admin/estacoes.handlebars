@@ -1,92 +1,214 @@
-<section id="content-types">
-    <div class="row">
-      {{#each estacoes}}
-     
-        <div class="col-xl-4 col-md-6 col-sm-12">
-                            <div class="card">
-                                <div class="card-content">
-                                    <a href="/infoEstacao/{{url}}">
-                                    <img src="/assets/images/samples/motorcycle.jpg" class="card-img-top img-fluid"
-                                        alt="singleminded">
-                                        </a>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{nome}}</h5>
-                                        <p class="card-text">
-                                            Chocolate sesame snaps apple pie danish cupcake sweet roll jujubes
-                                            tiramisu.Gummies
-                                            bonbon apple pie fruitcake icing biscuit apple pie jelly-o sweet roll.<br>
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#estacao" data-bs-whatever="@mdo">Levantar</button>
-                                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#estacao" data-bs-whatever="@mdo">Entregar</button>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                          
-                          
-        </div>
-      {{else}}
-        <h5>Nenhuma Estação</h5>
-      {{/each}}
+ <div class="page-heading">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Estacoes</h3>
+                            <p class="text-subtitle text-muted">Todas as Estações</p>
+                        </div>
+                        <div class="col-12 col-md-6 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+                                    <li class="breadcrumb-item " aria-current="page">Estacoes</li>
+                                </ol>
+                            </nav>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="response_return"> </div>
+                <section class="section">
+
+                    <div class="card">
+                        <div class="card-header">
+                            Simple Datatable
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end me-4">
+                         <button type="button" class="btn btn-primary me-md-2 " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          Cadastrar Estação
+                          </button>
+                      </div>
+                        <div class="card-body">
+                           
+                            <table class="table table-striped" id="table1">
+                                <thead>
+                                    <tr>
+                                        <th>Nome </th>
+                                        <th>Latitude</th>
+                                        <th>Longitude</th>
+                                        <th>Premio</th>
+                                        <th>Capacidade</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  
+                                  {{#each estacoes}}
+                                   <tr>
+                                        <td>{{nome}}</td>
+                                        <td>{{latitude}}</td>
+                                        <td>{{longitude}}</td>
+                                        <td>{{premio}}</td>
+                                        <td>{{capacidade}}</td>
+                                        
+                                        <td>
+
+                                          <button type="button" class="btn btn-primary btn-sm " id="visualizar" 
+                                           data-id="{{url}}">Ver</button>
+                                          <button type="button" class="btn btn-primary btn-sm " data-id="{{url}}"  id="delete">deletar</button>
+                                          
+                                          <button type="button" class="btn btn-primary btn-sm " data-id="{{url}}" id="editarbtn">Editar</button>
+                                          
+                                          
+                                        </td>
+                                    </tr>
+                                    {{else}}
+                                    <h5>Nenhuma Estação</h5>
+                                 {{/each}}
+                        
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+  </div>
+
+<!--Modal-->
+
+<!-- Button trigger modal -->
+
+<!-- Modal create Estação-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Estação</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="addForm" >
+            <div class="create_response"></div>
+          <div class="my-4">
+              <label for="nome">NOME:</label>
+                  <input type="text" name="nome" id="nome" placeholder="Digite o nome da Estação" class="form-control" />
+              </div >
+
+              <div class="my-4">
+                  <label for="latitude">Latitude:</label>
+                  <input type="number" name="latitude" id="latitude" placeholder="Digite a latitude" class="form-control" />
+              </div>
+              <div class="my-4">
+                  <label for="longitude">Longitude:</label>
+                  <input type="number" name="longitude" id="longitude" placeholder="Capacidade" class="form-control" />
+              </div>
+              <div class="my-4">
+              <label for="Premio">Premio:</label>
+                  <input type="number" name="premio" id="premio" placeholder="Premio" class="form-control" />
+              </div>
+              <div class="my-4">
+              <label for="Premio">Capacidade:</label>
+                  <input type="number" name="capacidade" id="capacidade" placeholder="capacidade" class="form-control" />
+              </div>
+        
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary" id="addButton">Enviar</button>
+      </div>
+      </form>
     </div>
+  </div>
+</div>
+</div>
+<!--fim create estacao-->
 
-</section>
-<!--Levantar biscicleta-->
-<div class="modal fade" id="estacao" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!---details estacao-->
+    <div id="detailsModal" class="modal fade none" role="dialog">
         <div class="modal-dialog">
-          <div class="modal-content">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center"><b>Detahes da Estação</b></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table table-responsive table-bordered">
+                                <!-- <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Detail</th>
+                                </tr>
+                                </thead> -->
+                                <tbody>
+                              
+                                <tr>
+                                    <td><b>Nome da Estação</b></td>
+                                    <td id="estacao_nome"></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Capacidade</b></td>
+                                    <td id="capacidade_estacao"></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Premio</b></td>
+                                    <td id="num_premio"></td>
+                                </tr>
+                             
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!---fim details estacao-->
+
+
+ <!-- Modal Edit Estação-->
+  <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="estacao">Levantar Biscicleta</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title" id="exampleModalLabel">Estação</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form action="/levantar" method="post">
-                <div class="mb-3">
-                    <label for="recipient-name" class="col-form-label">Email:</label>
-                    <input type="email" class="form-control" id="recipient-name" name="email">
-                  </div>
-                  <div class="mb-3">
-                    <input type="hidden" class="form-control" id="recipient-name" value="" name="estacaoId">
-                  </div>
+            <form id="editForm">
+                <div class="edit_response"></div>
+                <div class="my-4">
+              <label for="nome">NOME:</label>
+                  <input type="text" name="nome_edit" id="nome_edit" placeholder="Digite o nome da Estação" class="form-control" />
+              </div >
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-                </div>
-              </form>
-            </div>
-           
-          </div>
+              <div class="my-4">
+                  <label for="latitude">Latitude:</label>
+                  <input type="number" name="latitude_edit" id="latitude_edit" placeholder="Digite a latitude" class="form-control" />
+              </div>
+              <div class="my-4">
+                  <label for="longitude">Longitude:</label>
+                  <input type="number" name="longitude_edit" id="longitude_edit" placeholder="Capacidade" class="form-control" />
+              </div>
+              <div class="my-4">
+              <label for="Premio">Premio:</label>
+                  <input type="number" name="premio_edit" id="premio_edit" placeholder="Premio" class="form-control" />
+              </div>
+              <div class="my-4">
+              <label for="Premio">Capacidade:</label>
+                  <input type="number" name="capacidade_edit" id="capacidade_edit" placeholder="capacidade" class="form-control" />
+              </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" id="addButton_edit">Enviar</button>
         </div>
-      </div>
+        </form>
+    </div>
+    </div>
+ </div>
+  </div>
+                                          <!--fim Edit estacao-->
+</div>
 
-<!--entregar biscicleta-->
-
-<div class="modal fade" id="estacao" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="estacao">Entregar Biscicleta</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <form action="/entregar" method="post">
-                <div class="mb-3">
-                    <label for="recipient-name" class="col-form-label">Email:</label>
-                    <input type="email" class="form-control" id="recipient-name" name="email">
-                  </div>
-                  <div class="mb-3">
-                    <input type="hidden" class="form-control" id="recipient-name" value="" name="estacaoId">
-                  </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-                </div>
-              </form>
-            </div>
-           
-          </div>
-        </div>
-      </div>
-
-      

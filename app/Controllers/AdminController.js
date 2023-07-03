@@ -1,5 +1,5 @@
-const soap = require('soap')
-const url = 'http://localhost:8080/webservice?WSDL'
+var soap = require('soap')
+var url = 'http://localhost:8080/webservice?WSDL'
 
 class AdminController{
   
@@ -7,74 +7,120 @@ class AdminController{
         res.render('admin/index', {layout: 'main'})
     }
 
-    async getUser(req, res){
+    async edit_estacao(req, res){
+        console.log('editar estação')
+    }
+
+    async update_estacao(req, res){
+        console.log(req.body.edit_nome)
+    }
+
+    async create(req, res){
+        console.log(req.body)
+    }
+
+    async deleteEstacao(req, res){
+        
+      soap.createClient(url, (err, client)=>{
+      
+          if(err){
+        //      res.flash('error_msg', 'houve um erro')
+          //  console.log(err)
+          }else{
+              client.deletarEstacao({
+                 url_estacao:req.body.estacao_url
+              }, (err, estacao) =>{
+                 
+                res.json(estacao)
+              })
+          }
+      })
+    }
+
+    async getEstacaos(req, res){
+
+        soap.createClient(url, (err, client)=>{
+            if(err){
+          //      res.flash('error_msg', 'houve um erro')
+            //  console.log(err)
+            }else{
+                client.listarEstacoes({
+                    k:'1',
+                    latitude:'21',
+                    longitude:'22'
+                }, (err, estacoes) =>{
+  
+                  if(estacoes.return == 'Ocorreu Um Erro'){
+                      estacoes = [];
+                   }
+                      var estacoes = JSON.parse(estacoes.return)
+                      //console.log(estacoes[0].capacidade)
+                      res.render('admin/estacoes', {layout:'main', estacoes:estacoes})
+                })
+            }
+        })
+  
+      }
+
+    async getEstacao(req, res){
+
+       soap.createClient(url, (err, client)=>{
+    
+             if(err){
+                 console.log('erro')
+             }else{
+                 client.obterInfoEstacao({
+                     url_estacao:req.body.estacao_url
+                 }, (err, estacao) =>{
+            
+                     if(estacao.return == 'Ocorreu Um Erro'){
+                        res.json(estacao)
+                     }else{
+                        var estacoes = JSON.parse(estacoes.return)
+                        res.json(estacao)
+                     }
+                     
+                 })
+             }
+         })
+    }
+
+    async getUtilizadores(req, res){
         res.render('admin/usuarios', {layout:'main'})
     }
 
-    async estacao(req, res){
-     
-      soap.createClient(url, (err, client)=>{
+   async deleteUtilizador(req, res){
+    console.log(req.body.id)
+   }
+
+   async getUtilizador(req, res){
         
+    soap.createClient(url, (err, client)=>{
+    
         if(err){
-            //res.flash('error_msg', 'houve um erro')
-            console.log('falha')
+      //      res.flash('error_msg', 'houve um erro')
+          console.log(err)
         }else{
-            client.listarEstacoes({
-                k:2,
-                latitude:21,
-                longitude:22
-            }, (err, respost) =>{
-                    var estacoes = JSON.parse(respost.return)
-                    res.render('admin/estacoes', {layout:'main', estacoes:estacoes})
+        //  console.log(client)
+        client.obterInfoEstacao({
+            id:req.body.id
+        }, (err, utilizador) =>{
+
+            if(utilizador.return == 'Ocorreu Um Erro'){
+                res.json(utilizador)
+             }else{
+                var utilizador = JSON.parse(utilizador.return)
+                res.json(utilizador)
+             }
+                res.json(utilizador)
             })
         }
     })
+   }
 
-      //res.render('estacao', {leyout: 'main'})
-    }
 
-    async infoEstacao(req, res){
 
-        soap.createClient(url, (err, client)=>{
-        res.render('admin/estacao', {layout:'main'})
-        console.log(req.params.url)
-            if(err){
-                console.log('erro')
-            }else{
-                console.log(client)
-                client.obterInfoEstacao({
-                    url:req.params.url
-                }, (err, res) =>{
-                    //console.log(res)
-                    
-                })
-            }
-        })
-    }
 
-    async setEstacoes(req, res){
-
-        const url = 'http://192.168.137.18:8080/webservice?WSDL'
-        
-        soap.createClient(url, (err, client)=>{
-        
-            if(err){
-                res.flash('error_msg', 'houve um erro')
-            }else{
-                client.listarEstacoes({
-                    k:req.body.num,
-                    latitude:req.body.latitute,
-                    longitude:req.body.longuitude
-                }, (err, estacoes) =>{
-                    if(estacoes){
-                        res.render('admin/estacao', {estacoes:estacoes})
-                    }else{
-                        res.flash('error_msg', 'houve um erro') 
-                    }
-                })
-            }
-        })
-        }
 
         async getSaldo(req, res){
         
@@ -105,45 +151,6 @@ class AdminController{
                     }, (err, res) =>{
                         req.flash("success_msg", "Utilizador activado com sucesso")
                         res.redirect("/users")
-                    })
-                }
-            })
-        }
-
-        async entregarBiscleta(req, res){
-
-            soap.createClient(url, (err, client)=>{
-            
-                if(err){
-                    console.log('erro')
-                }else{
-                    client.entregarBiscleta({
-                        email: req.body.email,
-                        estacaoid: req.params.estacao_id
-                    }, (err, res) =>{
-                        req.flash("success_msg", "Biscicleta entregada com sucesso")
-                        res.redirect("/")
-                    })
-                }
-            })
-        }
-
-        
-
-        async levantarBiscicleta(req, res){
-            
-            soap.createClient(url, (err, client)=>{
-            
-                if(err){
-                    console.log('erro')
-                }else{
-                    client.levantarBiscicleta({
-                        email: req.body.email,
-                        estacaoid: req.params.estacao_id
-                    }, (err, res) =>{
-                        req.flash("success_msg", "Biscicleta Levantada com sucesso")
-                        res.redirect("/")
-                       // console.log(res)
                     })
                 }
             })

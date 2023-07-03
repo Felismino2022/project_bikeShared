@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/assets/css/bootstrap.css">
 
     <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
-<link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
+<link rel="stylesheet" href="/assets/vendors/simple-datatables/style.css">
     <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="/assets/css/app.css">
@@ -33,32 +33,18 @@
                     </div>
                 </div>
                 <div class="sidebar-menu">
-                    <ul class="menu">
-                        <li class="sidebar-title">Menu</li>
+                    <ul class="menu" id="sidebar_act">
+                        <li class="sidebar-title ba">Menu <i class="fa-solid fa-user"></i></li>
 
-                        <li class="sidebar-item active ">
-                            <a href="/" class='sidebar-link'>
+                        <li 
+                        class="sidebar-item ">
+                            <a href="/admin" class='sidebar-link' id="index">
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
 
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-grid-1x2-fill"></i>
-                                <span>Layouts</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="#">Default Layout</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-title">Forms &amp; Tables</li>
-
-                        <li class="sidebar-item  ">
+                        <li class="sidebar-item">
                             <a href="/utilizadores" class='sidebar-link'>
                                 <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                                 <span>Utilizadores</span>
@@ -105,11 +91,20 @@
     <script src="/assets/vendors/apexcharts/apexcharts.js"></script>
     <script src="/assets/js/pages/dashboard.js"></script>
 
+      <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
       <script src="/assets/vendors/simple-datatables/simple-datatables.js"></script>
+        <script src="/js/script.js"></script>
     <script>
         // Simple Datatable
         let table1 = document.querySelector('#table1');
         let dataTable = new simpleDatatables.DataTable(table1);
+
+        //chamada do modal
+        function mostrar_modal(i){
+            let el = document.getElementById('minha_caixa'+i);
+            let minha = new bootstrap.Modal(el);
+            minha.show();
+        }
     </script>
     <script src="/assets/js/main.js"></script>
 </body>

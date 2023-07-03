@@ -16,8 +16,10 @@ app.set('view engine', 'handlebars');
 app.set('views', './app/views');
 
 //Body Parser
-app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
+app.use(express.json())
+
 
 //sessão
 app.use(session({
